@@ -22,7 +22,7 @@ class Book extends Model
 
     public function author()
     {
-        return $this->belongsToMany(Author::class);
+        return $this->belongsToMany(Author::class,'book_authors','book_id','author_id');
 
     }
 

@@ -12,7 +12,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+
+        $books=Book::all();
+        $title="معرض الكتب";
+        return view('books.allBooks',compact('books','title'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $books=Book::where('title','like',"%{$request->term}%")->paginate(8);
+        $title='نتائج البحث '.$request->term;
+        return view('books.allBooks',compact('books','title'));
     }
 
     /**
@@ -36,7 +47,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+
+        return view('components.books.book-details',compact('book'));
+
     }
 
     /**

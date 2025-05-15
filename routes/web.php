@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,11 @@ Route::middleware([
     })->name('home');
 });
 
-Route::get('/view', function () {
-    dd(__('validation.required'));
+Route::controller(BookController::class)->prefix('books')->group(function () {
+
+    Route::get('/', 'index')->name('books.index');
+    Route::get('/search', 'search')->name('books.search');
+    Route::get('/details/{book}', 'show')->name('books.details');
+
 });
+
