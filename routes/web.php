@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,5 +28,13 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
     Route::get('/search', 'search')->name('books.search');
     Route::get('/details/{book}', 'show')->name('books.details');
 
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/categories', 'index')->name('categories.index');
+        Route::get('/category/search', 'search')->name('categories.search');
+        Route::get('/category/{category}', 'BooksCategories')->name('books.categories.index');
+
+    });
+
 });
+
 

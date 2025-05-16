@@ -22,7 +22,7 @@ class BookController extends Controller
     {
 
         $books=Book::where('title','like',"%{$request->term}%")->paginate(8);
-        $title='نتائج البحث '.$request->term;
+        $title=' نتائج البحث عن  '.$request->term;
         return view('books.allBooks',compact('books','title'));
     }
 

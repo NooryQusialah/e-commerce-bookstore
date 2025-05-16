@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,26 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+
+        return view('categories.allCategories', compact('categories'));
     }
 
+    public function BooksCategories(Category $category)
+    {
+        $books=$category->books()->paginate(5);
+        $title='الكتب التابعه لتصنيف عن  '.$category->name;
+        return view('books.allBooks',compact('books','title'));
+
+    }
+
+    public function search(Request $request)
+    {
+        $categories = Category::where('name','like',"%{$request->term}%")->paginate(8);
+        return view('categories.allCategories', compact('categories'));
+
+    }
     /**
      * Show the form for creating a new resource.
      */

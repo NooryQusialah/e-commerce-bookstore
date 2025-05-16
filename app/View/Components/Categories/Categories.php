@@ -1,22 +1,22 @@
 <?php
 
-namespace App\View\Components\Books;
+namespace App\View\Components\Categories;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class BookCard extends Component
+class Categories extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $books;
-    public $title;
-    public function __construct($books, $title)
+
+    public $categories;
+    public function __construct($categories)
     {
-        $this->books = $books;
-        $this->title = $title;
+        $this->categories = $categories;
+
     }
 
     /**
@@ -24,6 +24,6 @@ class BookCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.books.book-card');
+        return view('components.categories.categories');
     }
 }

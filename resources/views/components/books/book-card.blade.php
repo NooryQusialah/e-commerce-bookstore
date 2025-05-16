@@ -1,4 +1,5 @@
-<h3 class=" d-flex justify-content-center my-3 ">{{$title}}</h3>
+@foreach($books as $book)
+    @if($book->numberOfCopies > 0)
 <div class="col-lg-3 col-md-4 col-sm-2 mt-2">
     <div class="card mb-3">
         <div>
@@ -13,7 +14,7 @@
                 <h6 class="font-weight-semibold  mb-2">
                     <a href="#" class="text-default mb-2 text-decoration-none" data-abc="true">{{$book->title}}</a>
                 </h6>
-                <a href="#" class="text-muted text-decoration-none" data-abc="true">
+                <a href="{{route('books.categories.index',$book->category)}}" class="text-muted text-decoration-none" data-abc="true">
                     @if($book->category != null)
                         {{$book->category->name}}
                     @endif
@@ -29,3 +30,5 @@
         </div>
     </div>
 </div>
+    @endif
+@endforeach

@@ -6,18 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class SearchBook extends Component
+class BooksDependingToCategory extends Component
 {
     /**
      * Create a new component instance.
      */
-
-    public $action;
-    public $placeholder;
-    public function __construct($action, $placeholder='ابحث من هنا ')
+    public $books;
+    public $title;
+    public function __construct($books, $title)
     {
-        $this->action = $action;
-        $this->placeholder = $placeholder;
+        $this->books = $books;
+        $this->title = $title;
     }
 
     /**
@@ -25,6 +24,6 @@ class SearchBook extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.books.search-book');
+        return view('components.books.books-depending-to-category');
     }
 }
