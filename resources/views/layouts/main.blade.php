@@ -45,13 +45,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('publishers.index')}}">
                             الناشرون
                             <i class="fas fa-table"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('authors.index')}}">
                             المؤلفون
                             <i class="fas fa-pen"></i>
                         </a>

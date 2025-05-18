@@ -3,6 +3,7 @@
     <div class="container">
         <x-books.search-book/>
         <hr>
+
         <div class="mt-50 mb-50">
             <div class="row">
                 @if($books->count() > 0)

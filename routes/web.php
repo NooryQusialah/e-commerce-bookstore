@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PublisherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,6 +34,21 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
         Route::get('/categories', 'index')->name('categories.index');
         Route::get('/category/search', 'search')->name('categories.search');
         Route::get('/category/{category}', 'BooksCategories')->name('books.categories.index');
+
+    });
+
+    Route::controller(PublisherController::class)->group(function () {
+
+        Route::get('/publishers', 'index')->name('publishers.index');
+        Route::get('/publishers/search', 'search')->name('publishers.search');
+        Route::get('/publisher/{publisher}', 'BooksPublishers')->name('books.publishers.index');
+
+    });
+
+    Route::controller(AuthorController::class)->group(function () {
+        Route::get('/authors', 'index')->name('authors.index');
+        Route::get('/authors/search', 'search')->name('authors.search');
+        Route::get('/author/{author}', 'BooksAuthors')->name('books.authors.index');
 
     });
 

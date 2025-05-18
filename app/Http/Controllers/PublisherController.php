@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PublisherController extends Controller
 {
@@ -12,7 +14,31 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        $publishers = Publisher::with('user')
+                                ->get();
+        return view('publishers.index', compact('publishers'));
+
+    }
+
+
+    public function BooksPublishers(Publisher $publisher)
+    {
+
+        $books=$publisher->books()->paginate(8);
+        $title='الكتب التابعة للناشر ';
+        return view('books.allBooks', compact('books','title'));
+
+    }
+
+    public function search(Request $request)
+    {
+        $term = $request->term;
+
+        $publishers = Publisher::whereHas('user', function ($query) use ($term) {
+            $query->where('name', 'like', "%{$term}%");
+        })->with('user')->get();
+
+        return view('publishers.index', compact('publishers'));
     }
 
     /**
@@ -20,7 +46,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

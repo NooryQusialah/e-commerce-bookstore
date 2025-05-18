@@ -12,9 +12,28 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::with('user','books')->get();
+        return view('authors.index', compact('authors'));
+
     }
 
+    public function BooksAuthors(Author $author)
+    {
+        $books = $author->books()->paginate(8);
+        $title='الكتب التابعة للمؤالف ';
+        return view('books.allBooks', compact('books','title'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $term=$request->term;
+        $authors=Author::whereHas('books', function ($query) use ($term) {
+                      $query->where('name', 'LIKE', '%' . $term . '%');
+                  })->with('user')->paginate(8);
+
+        return view('authors.index', compact('authors'));
+    }
     /**
      * Show the form for creating a new resource.
      */
