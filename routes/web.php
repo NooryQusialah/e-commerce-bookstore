@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
@@ -53,5 +54,12 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
     });
 
 });
+
+
+Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',])->controller(AdminController::class)->group(function () {
+    Route::get('/admin/dashboard','index')->name('admin.dashboard');
+});
+
+
 
 
