@@ -56,8 +56,19 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
 });
 
 
-Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',])->controller(AdminController::class)->group(function () {
-    Route::get('/admin/dashboard','index')->name('admin.dashboard');
+Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('/admin/dashboard')->controller(AdminController::class)->group(function () {
+    Route::get('/','index')->name('admin.dashboard');
+
+    Route::controller(BookController::class)->group(function () {
+       Route::get('/books', 'allBooks')->name('admin.books.index');
+       Route::get('/books/create', 'create')->name('admin.books.create');
+       Route::post('/books/store', 'store')->name('admin.books.store');
+       Route::get('/books/{book}', 'showBook')->name('admin.books.show');
+       Route::get('/books/{book}/edit', 'edit')->name('admin.books.edit');
+       Route::put('/books/{book}', 'update')->name('admin.books.update');
+       Route::delete('/books/{book}', 'destroy')->name('admin.books.destroy');
+
+    });
 });
 
 
