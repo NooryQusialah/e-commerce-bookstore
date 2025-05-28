@@ -21,7 +21,7 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ request()->is('admin/books*') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('admin/dashboard/books*') ? 'active' : '' }}">
         <a class="nav-link text-right" href="{{route('admin.books.index')}}">
             <i class="fas fa-book-open"></i>
             <span>الكتب</span>
@@ -29,8 +29,8 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}">
-        <a class="nav-link text-right" href="#">
+    <li class="nav-item {{ request()->is('admin/dashboard/categories*') ? 'active' : '' }}">
+        <a class="nav-link text-right" href="{{route('admin.categories.index')}}">
             <i class="fas fa-folder"></i>
             <span>التصنيفات</span>
         </a>

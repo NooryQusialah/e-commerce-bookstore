@@ -67,6 +67,16 @@ Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',]
        Route::get('/books/{book}/edit', 'edit')->name('admin.books.edit');
        Route::put('/books/{book}', 'update')->name('admin.books.update');
        Route::delete('/books/{book}', 'destroy')->name('admin.books.destroy');
+    });
+
+    Route::controller(CategoryController::class)->group(function () {
+       Route::get('/categories', 'allCategories')->name('admin.categories.index');
+       Route::get('/categories/create', 'create')->name('admin.categories.create');
+       Route::post('/categories/store', 'store')->name('admin.categories.store');
+       Route::get('/categories/{category}', 'show')->name('admin.categories.show');
+       Route::get('/categories/{category}/edit', 'edit')->name('admin.categories.edit');
+       Route::put('/categories/{category}', 'update')->name('admin.categories.update');
+       Route::delete('/categories/{category}', 'destroy')->name('admin.categories.destroy');
 
     });
 });
