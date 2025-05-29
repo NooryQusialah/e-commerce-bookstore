@@ -3,8 +3,8 @@
         <div class="-mt-6 card bg-white text-black shadow-lg p-4 w-100">
             <div class="row flex-row" style="direction: ltr;">
                 <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
-{{--                    <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="img-fluid w-75 p-3" alt="Product Image">--}}
-                    <img src="{{ asset($book->coverImage) }}" class="img-fluid w-75 p-3" alt="Product Image">
+                    <img src="{{ $book->coverImage ? asset($book->coverImage) : asset('images/default.png') }}" class="img-fluid w-75 p-3" alt="Product Image">
+
                 </div>
                 <div class="col-md-6 py-md-5" style="direction: rtl;">
                     <div class="d-flex justify-content-between align-items-center">

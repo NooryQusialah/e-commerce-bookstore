@@ -85,14 +85,6 @@ class BookController extends Controller
             $validatedData['cover_image'] = 'storage/booksImage/' . $fileName;
         }
 
-
-//        if ($request->hasFile('cover_image')) {
-//            $file = $request->file('cover_image');
-//            $fileName = time() . '.' . $file->getClientOriginalExtension();
-//            $file->storeAs('public/booksImage', $fileName);
-//            $validatedData['cover_image'] = 'storage/booksImage/' . $fileName;
-//        }
-
         // Create the book
         $book = Book::create([
             'title' => $validatedData['title'],

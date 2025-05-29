@@ -77,7 +77,17 @@ Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',]
        Route::get('/categories/{category}/edit', 'edit')->name('admin.categories.edit');
        Route::put('/categories/{category}', 'update')->name('admin.categories.update');
        Route::delete('/categories/{category}', 'destroy')->name('admin.categories.destroy');
+    });
 
+    Route::controller(PublisherController::class)->group(function () {
+        Route::get('/publishers', 'allPublishers')->name('admin.publishers.index');
+        Route::get('/publishers/create', 'create')->name('admin.publishers.create');
+        Route::post('/publishers/store', 'store')->name('admin.publishers.store');
+        Route::get('/publishers/{publisher}', 'show')->name('admin.publishers.show');
+        Route::get('/publishers/{publisher}/edit', 'edit')->name('admin.publishers.edit');
+        Route::put('/publishers/{publisher}', 'update')->name('admin.publishers.update');
+        Route::get('publishers/block/{publisher}', 'block')->name('admin.publishers.block');
+        Route::delete('/publishers/{publisher}', 'destroy')->name('admin.publishers.destroy');
     });
 });
 
