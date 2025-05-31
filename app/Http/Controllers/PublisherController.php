@@ -168,6 +168,7 @@ class PublisherController extends Controller
         }
         else
         {
+            $publisher->user()->delete();
             $publisher->delete();
             session()->flash('flash_message','  تم الحذف بنجاح. ');
             return redirect()->route('admin.publishers.index')->with('success','تم الحذف بنجاح.');

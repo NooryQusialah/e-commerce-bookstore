@@ -63,7 +63,6 @@
                         </a>
                     </li>
                 </ul>
-
                 <ul class="navbar-nav mr-auto">
                     @guest
                         <li class="nav-item">
@@ -79,6 +78,7 @@
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown justify-content-left">
 
                                     <a id="navbardropdown" class="nav-link" href="#" data-bs-toggle="dropdown">
@@ -86,14 +86,7 @@
                                     </a>
                                 <nav class="bg-white border-bottom border-2 mb-3">
                                     <div class="dropdown text-end me-4 mt-2">
-{{--                                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">--}}
-{{--                                            <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" class="rounded-circle border" width="40" height="40">--}}
-{{--                                        </a>--}}
                                         <ul class="dropdown-menu text-end mt-2" aria-labelledby="userDropdown" style="min-width: 200px;">
-{{--                                            <li class="px-3 py-2 border-bottom">--}}
-{{--                                                <strong>{{ Auth::user()->name }}</strong><br>--}}
-{{--                                                <small class="text-muted">{{ Auth::user()->email }}</small>--}}
-{{--                                            </li>--}}
                                             <li>
                                                 <a class="dropdown-item" href="{{ route('profile.show') }}">
                                                     {{ __('الملف الشخصي') }}

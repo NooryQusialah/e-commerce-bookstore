@@ -36,8 +36,8 @@
         </a>
     </li>
 
-    <li class="nav-item {{ request()->is('admin/authors*') ? 'active' : '' }}">
-        <a class="nav-link text-right" href="#">
+    <li class="nav-item {{ request()->is('admin/dashboard/authors*') ? 'active' : '' }}">
+        <a class="nav-link text-right" href="{{route('admin.authors.index')}}">
             <i class="fas fa-pen-fancy"></i>
             <span>المؤلفون</span>
         </a>
@@ -49,8 +49,8 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item {{ request()->is('admin/users*') ? 'active' : '' }}">
-        <a class="nav-link text-right" href="#">
+    <li class="nav-item {{ request()->is('admin/dashboard/users*') ? 'active' : '' }}">
+        <a class="nav-link text-right" href="{{route('admin.users.index')}}">
             <i class="fas fa-users"></i>
             <span>المستخدمون</span></a>
     </li>

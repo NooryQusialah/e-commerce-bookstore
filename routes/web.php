@@ -5,39 +5,35 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//})->name('index');;
 
 Route::get('/home', function () {
     return view('layouts.main');
 })->middleware('auth:sanctum')->name('dashboard');;
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('home');
-});
+//Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+////    Route::get('/dashboard', function () {return view('dashboard');})->name('home');
+//});
 
+
+Route::controller(BookController::class)->group(function () {
+    Route::get('/', 'index')->name('books.index');
+});
 Route::controller(BookController::class)->prefix('books')->group(function () {
 
-    Route::get('/', 'index')->name('books.index');
     Route::get('/search', 'search')->name('books.search');
     Route::get('/details/{book}', 'show')->name('books.details');
-
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index')->name('categories.index');
         Route::get('/category/search', 'search')->name('categories.search');
         Route::get('/category/{category}', 'BooksCategories')->name('books.categories.index');
 
     });
-
     Route::controller(PublisherController::class)->group(function () {
 
         Route::get('/publishers', 'index')->name('publishers.index');
@@ -56,9 +52,8 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
 });
 
 
-Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',])->prefix('/admin/dashboard')->controller(AdminController::class)->group(function () {
+Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified','access-check',])->prefix('/admin/dashboard')->controller(AdminController::class)->group(function () {
     Route::get('/','index')->name('admin.dashboard');
-
     Route::controller(BookController::class)->group(function () {
        Route::get('/books', 'allBooks')->name('admin.books.index');
        Route::get('/books/create', 'create')->name('admin.books.create');
@@ -88,6 +83,25 @@ Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified',]
         Route::put('/publishers/{publisher}', 'update')->name('admin.publishers.update');
         Route::get('publishers/block/{publisher}', 'block')->name('admin.publishers.block');
         Route::delete('/publishers/{publisher}', 'destroy')->name('admin.publishers.destroy');
+    });
+    Route::controller(AuthorController::class)->group(function () {
+       Route::get('/authors', 'allAuthors')->name('admin.authors.index');
+       Route::get('/authors/create', 'create')->name('admin.authors.create');
+       Route::post('/authors/store', 'store')->name('admin.authors.store');
+       Route::get('/authors/{author}', 'show')->name('admin.authors.show');
+       Route::get('/authors/{author}/edit', 'edit')->name('admin.authors.edit');
+       Route::put('/authors/{author}', 'update')->name('admin.authors.update');
+       Route::get('/authors/block/{author}', 'block')->name('admin.authors.block');
+       Route::delete('/authors/{author}', 'destroy')->name('admin.authors.destroy');
+    });
+
+
+    Route::controller(UserController::class)->group(function () {
+       Route::get('/users', 'index')->name('admin.users.index');
+       Route::get('/users/{user}', 'show')->name('admin.users.show');
+       Route::get('/users/block/{user}', 'block')->name('admin.users.block');
+       Route::delete('/users/{user}', 'destroy')->name('admin.users.destroy');
+
     });
 });
 
