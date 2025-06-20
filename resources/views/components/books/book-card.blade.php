@@ -22,10 +22,25 @@
             </div>
             <h3 class="mb-0 font-weight-semibold">{{$book->price}}</h3>
             <div>
-                <i class="fa fa-star star"></i>
-                <i class="fa fa-star star"></i>
-                <i class="fa fa-star star"></i>
-                <i class="fa fa-star star"></i>
+                <span class="score">
+                    <div class="score-wrap">
+                        <span class="stars-active" style="width: {{$book->rate($book)*20}}%">
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                        </span>
+                        <span class="stars-inactive">
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                            <i class="fa fa-star star" aria-hidden="true"></i>
+                        </span>
+
+                    </div>
+                </span>
             </div>
         </div>
     </div>

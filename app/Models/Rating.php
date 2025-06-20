@@ -8,14 +8,14 @@ class Rating extends Model
 {
     protected $fillable = ['value', 'user_id', 'book_id'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function book()
-    {
-        return $this->belongsTo(Book::class);
-    }
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
+//
+//    public function book()
+//    {
+//        return $this->belongsTo(Book::class);
+//    }
 
 }

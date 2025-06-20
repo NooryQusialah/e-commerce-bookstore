@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -42,6 +43,22 @@ class BookController extends Controller
             ->paginate(8);
         return view('dashboard.admin.books.allBooks',compact('books'));
 
+    }
+    public function rate(Request $request,Book $book)
+    {
+        if (auth()->user()->rated($book)) {
+            $rating =Rating::where(['user_id'=>auth()->user()->id,'book_id'=>$book->id])->first();
+            $rating->value = $request->value;
+            $rating->save();
+        }
+        else{
+            Rating::create([
+               'user_id'=>auth()->user()->id,
+               'book_id'=>$book->id,
+                'value'=>$request->value
+            ]);
+            return back();
+        }
     }
     public function create()
     {

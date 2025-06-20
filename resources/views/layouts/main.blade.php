@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{csrf_token()}}"/>
     <title>مكتبتي</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
 
         body {
@@ -23,6 +24,66 @@
         }
         li {
             margin-left: 3px;
+        }
+        .score{
+            display: block;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .score-wrap{
+            display: inline-block;
+            position: relative;
+            height: 19px;
+        }
+
+        .score .stars-active{
+            color: #FFCA00;
+            position: relative;
+            z-index: 10;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .score .stars-inactive{
+            color: lightgrey;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .rating{
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            font-size: 20px;
+
+        }
+        .rating-star{
+            padding: 0 5px;
+            margin: 0;
+            cursor: pointer;
+            display: block;
+            float: left;
+        }
+        .rating-star:after{
+            position: relative;
+            font-family: "font Awesome 5 Free";
+            content: '\f005';
+            color: lightgrey;
+        }
+        .rating-star.checked ~ .rating-star:after,
+        .rating-star.checked:after{
+            content: '\f005';
+            color: #FFCA00;
+        }
+        .rating:hover .rating-star:after{
+            content: '\f005';
+            color: lightgrey;
+        }
+        .rating-star:hover ~ .rating-star:after,
+         .rating .rating-star:hover:after{
+            content: '\f005';
+            color: #FFCA00;
         }
     </style>
 
@@ -125,8 +186,9 @@
 <main>
     {{$slot}}
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
-
+@stack('scripts')
 </body>
 </html>
