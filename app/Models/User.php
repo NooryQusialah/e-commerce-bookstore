@@ -82,6 +82,10 @@ class User extends Authenticatable
     {
         return $this->rated($book) ? $this->ratings->where('book_id',$book->id)->first() : null;
     }
+    public function booksInCart(Book $book= null)
+    {
+        return $this->belongsToMany(Book::class,'book_users')->withPivot(['numberOfCopies','bought'])->wherePivot('bought',false);
+    }
 
     protected function casts(): array
     {

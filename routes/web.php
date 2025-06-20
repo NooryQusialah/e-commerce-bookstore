@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,14 @@ Route::get('/home', function () {
 Route::controller(BookController::class)->group(function () {
     Route::get('/', 'index')->name('books.index');
 });
+
+Route::controller(CartController::class)->group(function () {
+    Route::post('/cart', 'addCart')->name('addToCart');
+    Route::get('/cart/books', 'viewCart')->name('viewCart');
+    Route::delete('/cart/{book}', 'removeOne')->name('removeOneCart');
+    Route::delete('cart/{book}/deleteall', 'removeAll')->name('removeAllCart');
+
+})->middleware('auth:sanctum');
 Route::controller(BookController::class)->prefix('books')->group(function () {
 
     Route::get('/search', 'search')->name('books.search');

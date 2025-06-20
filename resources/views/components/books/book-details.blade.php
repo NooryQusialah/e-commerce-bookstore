@@ -78,9 +78,13 @@
                 <div class="col">
                     <div class="d-flex gap-3 flex-wrap mt-3"></div>
                 </div>
-                <div class="col text-end">
-                    <button class="btn btn-outline-success">أضف إلى السلة</button>
+                @auth
+                <div class="form col text-end">
+                        <input id="bookId" type="hidden" value="{{$book->id}}">
+                        <span class="text-muted"> <input class="form-control d-inline mx-auto rounded-3 mt-5" id="quantity" name="quantity" type="number" value=1 min="1" max="{{$book->numberOfCopies}}" style="width: 10%" required ></span>
+                        <button type="submit" class="btn btn-outline-success addCart">أضف إلى السلة</button>
                 </div>
+                @endauth
             </div>
         </div>
     </div>
@@ -107,6 +111,45 @@
             });
         });
     </script>
-@endpush
+        <script>
+            $(document).ready(function () {
+                $('.addCart').on('click', function (event) {
+                    event.preventDefault();
+
+                    var form = $(this).closest('.form');
+                    var bookId = form.find('#bookId').val();
+                    var quantity = form.find('#quantity').val();
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        method: 'POST',
+                        url: "{{ route('addToCart') }}",
+                        data: {
+                            quantity: quantity,
+                            id: bookId,
+                            _token: token
+                        },
+                        success: function (data) {
+                            $('span.badge').text(data.numberOfProduct);
+                            toastr.success('تم الإضافة بنجاح');
+                        },
+                        error: function (xhr) {
+                            console.error(xhr.status, xhr.responseText);
+                            if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.error) {
+                                toastr.error(xhr.responseJSON.error);
+                            }
+                            if (xhr.status === 422) {
+                                const response = JSON.parse(xhr.responseText);
+                                alert(response.error);
+                            }
+                            else {
+                                alert('حدث خطأ ما');
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush
+
 </x-main-layout>
 

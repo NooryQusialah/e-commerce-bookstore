@@ -99,6 +99,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
+
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('viewCart')}}">
+                                @if(auth()->user()->booksInCart()->count() > 0)
+                                    <span class="badge bg-secondary">{{auth()->user()->booksInCart()->count()}}</span>
+                                @else
+                                    <span class="badge bg-secondary">0</span>
+                                @endif
+                                السلة
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+                    @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('categories.index')}}">
                             التصنيفات
