@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Publisher;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\isEmpty;
@@ -134,7 +135,11 @@ class BookController extends Controller
     public function show(Book $book)
     {
 
-        return view('components.books.book-details',compact('book'));
+        $bookRated=0;
+        if (Auth::check()) {
+            $bookRated=auth()->user()->ratedPurchases()->where('book_id',$book->id)->first();
+        }
+        return view('components.books.book-details',compact('book','bookRated'));
 
     }
 

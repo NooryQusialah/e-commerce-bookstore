@@ -9,11 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use Laravel\Cashier\Billable;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
+    use Billable;
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
@@ -85,6 +85,15 @@ class User extends Authenticatable
     public function booksInCart(Book $book= null)
     {
         return $this->belongsToMany(Book::class,'book_users')->withPivot(['numberOfCopies','bought'])->wherePivot('bought',false);
+    }
+
+    public function ratedPurchases()
+    {
+        return $this->belongsToMany(Book::class,'book_users')->withPivot('bought')->wherePivot('bought',true);
+    }
+    public function purchaedProducts()
+    {
+        return $this->belongsToMany(Book::class,'book_users')->withPivot('numberOfCopies','bought','created_at')->wherePivot('bought',true)->orderBy('pivot_created_at','desc');
     }
 
     protected function casts(): array

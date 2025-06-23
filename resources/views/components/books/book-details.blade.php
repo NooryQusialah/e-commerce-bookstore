@@ -10,9 +10,9 @@
                     <!-- Book details -->
                     <div class="d-flex justify-content-between align-items-center">
                         <h2>{{ $book->title }}</h2>
-                        @if($book->isBn)
-                            <h6>الرقم التسلسلي :  {{ $book->isBn }}</h6>
-                        @endif
+                            @if($book->isBn)
+                                <h6>الرقم التسلسلي :  {{ $book->isBn }}</h6>
+                            @endif
                     </div>
                     <p>{{ $book->description }}</p>
                     @if($book->category)
@@ -65,18 +65,28 @@
 
                 <!-- Rating form -->
                 @auth
-                    <h4 class="mb-3">قيم هذا الكتاب </h4>
-                    <div class="rating">
-                        @for ($i = 5; $i >= 1; $i--)
-                            <span class="rating-star {{ auth()->user()->rated($book) && auth()->user()->bookRating($book)->value == $i ? 'checked' : '' }}" data-value="{{ $i }}"></span>
-                        @endfor
-                    </div>
+                    @if($bookRated)
+                        <h4 class="mb-3">قيم هذا الكتاب </h4>
+                        <div class="rating">
+                            @for ($i = 5; $i >= 1; $i--)
+                                <span class="rating-star {{ auth()->user()->rated($book) && auth()->user()->bookRating($book)->value == $i ? 'checked' : '' }}" data-value="{{ $i }}"></span>
+                            @endfor
+                        </div>
+                    @else
+                        <div class="alert alert-danger mt-4" role="alert">
+                            لتقييم الكتاب يجب عليك شراءة
+                        </div>
+                    @endif
                 @endauth
             </div>
 
             <div class="row mt-4 align-items-center">
                 <div class="col">
-                    <div class="d-flex gap-3 flex-wrap mt-3"></div>
+                    <div class="d-flex gap-3 flex-wrap mt-3">
+                        <a href="{{route('books.index')}}" class="mt-2">
+                            <button type="submit" class="btn btn-outline-light"> رجوع </button>
+                        </a>
+                    </div>
                 </div>
                 @auth
                 <div class="form col text-end">

@@ -6,21 +6,20 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\PurchaseCnotroller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
 //    return view('welcome');
 //})->name('index');;
-
-Route::get('/home', function () {
-    return view('layouts.main');
-})->middleware('auth:sanctum')->name('dashboard');;
-
 //Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 ////    Route::get('/dashboard', function () {return view('dashboard');})->name('home');
 //});
 
+Route::get('/home', function () {
+    return view('layouts.main');
+})->middleware('auth:sanctum')->name('dashboard');;
 
 Route::controller(BookController::class)->group(function () {
     Route::get('/', 'index')->name('books.index');
@@ -30,14 +29,21 @@ Route::controller(CartController::class)->group(function () {
     Route::post('/cart', 'addCart')->name('addToCart');
     Route::get('/cart/books', 'viewCart')->name('viewCart');
     Route::delete('/cart/{book}', 'removeOne')->name('removeOneCart');
-    Route::delete('cart/{book}/deleteall', 'removeAll')->name('removeAllCart');
+    Route::delete('cart/{book}/deleteAll', 'removeAll')->name('removeAllCart');
 
 })->middleware('auth:sanctum');
+Route::controller(PurchaseCnotroller::class)->group(function () {
+    Route::get('/checkout', 'creditCheckOut')->name('creditCheckOut');
+    Route::post('/checkout', 'purchase')->name('products.purchase');
+    Route::get('/myproducts', 'myProducts')->name('myProducts');
+})->middleware('auth:sanctum');
+
 Route::controller(BookController::class)->prefix('books')->group(function () {
 
     Route::get('/search', 'search')->name('books.search');
     Route::get('/details/{book}', 'show')->name('books.details');
     Route::post('/{book}/rate', 'rate')->name('books.rate');
+
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index')->name('categories.index');
         Route::get('/category/search', 'search')->name('categories.search');
@@ -64,6 +70,9 @@ Route::controller(BookController::class)->prefix('books')->group(function () {
 
 Route::middleware([ 'auth:sanctum',config('jetstream.auth_session'),'verified','access-check',])->prefix('/admin/dashboard')->controller(AdminController::class)->group(function () {
     Route::get('/','index')->name('admin.dashboard');
+    Route::controller(PurchaseCnotroller::class)->group(function () {
+       Route::get('allproducts','allProducts')->name('allProducts');
+    });
     Route::controller(BookController::class)->group(function () {
        Route::get('/books', 'allBooks')->name('admin.books.index');
        Route::get('/books/create', 'create')->name('admin.books.create');

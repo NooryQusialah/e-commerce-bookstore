@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{csrf_token()}}"/>
-    <title>مكتبتي</title>
+    <title>مكتبة زاد </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,12 +15,36 @@
     <style>
 
         body {
-                    font-family: "Cairo", sans-serif;
-                    font-optical-sizing: auto;
-                    /*font-weight: <weight>;*/
-                    font-style: normal;
-                    font-variation-settings:
-                        "slnt" 0;
+            font-family: "Cairo", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-variation-settings:
+                "slnt" 0;
+        }
+        .StripeElement {
+            box-sizing: border-box;
+            height: 40px;
+            padding: 10px 12px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: white;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+        }
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+
+        .bg-cart{
+            background-color:#ffc107 ;
+            color: #fff;
         }
         li {
             margin-left: 3px;
@@ -131,12 +155,14 @@
                             <i class="fas fa-pen"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            مشترياتي
-                            <i class="fas fa-basket-shopping"></i>
-                        </a>
-                    </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('myProducts')}}">
+                                    مشترياتي
+                                    <i class="fas fa-basket-shopping"></i>
+                                </a>
+                            </li>
+                        @endauth
                 </ul>
                 <ul class="navbar-nav mr-auto">
                     @guest
