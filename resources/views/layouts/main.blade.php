@@ -14,6 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
 
+        @stack('style')
         body {
             font-family: "Cairo", sans-serif;
             font-optical-sizing: auto;
@@ -46,6 +47,11 @@
             background-color:#ffc107 ;
             color: #fff;
         }
+        .card .card-body .card-title{
+            height: 40px;
+            overflow: hidden;
+        }
+
         li {
             margin-left: 3px;
         }

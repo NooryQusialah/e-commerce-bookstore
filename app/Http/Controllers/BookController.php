@@ -41,7 +41,7 @@ class BookController extends Controller
     public function allBooks()
     {
         $books=Book::with('author.user','publisher.user','category:id,name')
-            ->paginate(8);
+            ->paginate(10);
         return view('dashboard.admin.books.allBooks',compact('books'));
 
     }

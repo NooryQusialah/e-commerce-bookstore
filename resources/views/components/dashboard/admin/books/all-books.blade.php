@@ -1,8 +1,8 @@
+
 <div class="row">
     <div class="col-md-12">
-
-        <a href="{{route('admin.books.create')}}" class="mb-3">
-            <button type="submit" class="btn-primary mb-3" >انشاء كتاب</button></a>
+        <a href="{{route('admin.books.create')}}" class="mb-1">
+            <button type="submit" class="btn-primary mb-1" >انشاء كتاب</button></a>
         <table id="books-table" class="table table-striped table-bordered text-right" width="100%" cellspacing="0">
             <thead>
             <tr>
@@ -62,5 +62,21 @@
             </tbody>
         </table>
     </div>
-
 </div>
+
+@push('scripts')
+    <script src="{{ asset('theme/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('theme/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#books-table').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/2.3.2/i18n/ar.json"
+                },
+                "pageLength": 5,
+            });
+        });
+    </script>
+
+@endpush

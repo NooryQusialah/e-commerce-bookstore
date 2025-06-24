@@ -4,7 +4,7 @@
             <div class="row flex-row" style="direction: ltr;">
                 <!-- Book image and info -->
                 <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
-                    <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="img-fluid w-75 p-3" alt="Product Image">
+                    <img src="{{ $book->coverImage ? asset($book->coverImage) : asset('images/default.png') }} " alt="no image"  class="img-fluid w-75 p-3" >
                 </div>
                 <div class="col-md-6 py-md-5" style="direction: rtl;">
                     <!-- Book details -->

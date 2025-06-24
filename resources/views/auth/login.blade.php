@@ -1,20 +1,16 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+{{--            <x-authentication-card-logo />--}}
         </x-slot>
-
         <x-validation-errors class="mb-4" />
-
         @session('status')
             <div class="mb-4 font-medium text-sm text-green-600">
                 {{ $value }}
             </div>
         @endsession
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <div>
                 <x-label for="email" value="{{ __('site.email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"  autofocus autocomplete="username" />

@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\PurchaseCnotroller;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::get('/home', function () {
 
 Route::controller(BookController::class)->group(function () {
     Route::get('/', 'index')->name('books.index');
+});
+Route::controller(SocialiteController::class)->group(function () {
+   Route::get('auth/google', 'redirectToGoogle')->name('socialite.redirect');
+   Route::get('/auth/google/callback', 'handleGoogleCallback')->name('socialite.callback');
 });
 
 Route::controller(CartController::class)->group(function () {

@@ -16,6 +16,8 @@ class UserController extends Controller
         return view('dashboard.admin.users.allUsers',compact('users'));
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      */

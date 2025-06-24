@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -56,5 +56,13 @@
                 </x-button>
             </div>
         </form>
+        <div class="flex items-center justify-center mt-4">
+            <form action="{{route('socialite.redirect')}}" method="get">
+                <x-button class="ms-4">
+                    {{ __('التسجيل بحساب قوقل') }}
+                </x-button>
+            </form>
+        </div>
+
     </x-authentication-card>
 </x-guest-layout>
