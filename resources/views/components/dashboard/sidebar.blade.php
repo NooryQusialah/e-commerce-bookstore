@@ -4,7 +4,8 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon">
-            <img style="width:70%" src="{{ asset('logo.png') }}">
+{{--            <img style="width:70%" src="{{ asset('logo.png') }}">--}}
+            <p>مكتبة زاد </p>
         </div>
     </a>
 
